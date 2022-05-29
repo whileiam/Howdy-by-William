@@ -61,23 +61,29 @@
                                 </li>
                             @endif
                         @else
-                        <li class="nav-item me-2 position-relative">
-                    <?php
 
-                        $order_main = \App\Models\Order::where('user_id', Auth::user()->id)->where('status',0)->first();
-                            if(!empty($order_main)){
-                            $notif = \App\Models\OrderDetail::where('order_id', $order_main->id)->count();
-                            }
-                    ?>
-                        <a class="nav-link" href="{{url('checkout')}}">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                    @if(!empty($notif))
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                        {{ $notif }}
-                    @endif
-                        <span class="visually-hidden">jumlah pesanan</span>
-                    </span>
-                    </a></li>
+                        @if (Auth::user()->role == 1)
+                        <li class="nav-item me-2 position-relative">
+                            <?php
+
+                                $order_main = \App\Models\Order::where('user_id', Auth::user()->id)->where('status',0)->first();
+                                    if(!empty($order_main)){
+                                    $notif = \App\Models\OrderDetail::where('order_id', $order_main->id)->count();
+                                    }
+                            ?>
+                            <a class="nav-link" href="{{url('checkout')}}">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            @if(!empty($notif))
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                {{ $notif }}
+                            @endif
+                                <span class="visually-hidden">jumlah pesanan</span>
+                            </span>
+                            </a>
+                        </li>
+                        @endif
+
+                        
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
@@ -95,6 +101,11 @@
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
+                                    @if (Auth::user()->role ==2)
+                                        <a class="dropdown-item" href="{{ url('dashboard') }}">
+                                            Admin Menu
+                                        </a>
+                                    @endif
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf

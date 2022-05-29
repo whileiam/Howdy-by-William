@@ -30,8 +30,11 @@
                             </tr>
                         </tbody>
                     </table>
-                    <hr>
-                    <a href="{{ url('order') }}/{{ $item->id }}" class="btn btn-success text-center" style="text-align:center;display:block;"><i class="fa-solid fa-cart-shopping"></i> Pesan</a>
+                    
+                    @if (Auth::user()->role == 1)
+                        <hr>
+                        <a href="{{ url('order') }}/{{ $item->id }}" class="btn btn-success text-center" style="text-align:center;display:block;"><i class="fa-solid fa-cart-shopping"></i> Pesan</a>
+                    @endif
                 </div>
             </div>
         </div>

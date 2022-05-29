@@ -15,14 +15,22 @@ class ProfileController extends Controller
         $this->middleware('auth');
     }
 
-    public function index(){
+    public function index()
+    {
         $user = User::where('id', Auth::user()->id)->first();
-        
+
         return view('profile.index', compact('user'));
     }
 
-    public function update_profile(Request $request){
-        $this->validate($request,[
+    public function editprofile()
+    {
+        $user = User::where('id', Auth::user()->id)->first();
+        return view('profile.editprofile', compact('user'));
+    }
+
+    public function update_profile(Request $request)
+    {
+        $this->validate($request, [
             'password' => 'confirmed',
         ]);
 
@@ -31,12 +39,12 @@ class ProfileController extends Controller
         $user->email = $request->email;
         $user->phone_number = $request->phone_number;
         $user->address = $request->address;
-        
-        if(!empty($request->password)){
+
+        if (!empty($request->password)) {
             $user->password = Hash::make($request->password);
         }
         $user->update();
-        
+
         alert()->success('Sukses', 'Update Profil Berhasil');
         return redirect('profile');
     }
