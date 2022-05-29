@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Models\User;
+use App\Models\Item;
+use Carbon\Carbon;
+use Alert;
 
 class AdminController extends Controller
 {
@@ -27,7 +30,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-    //
+        return view('admin.add-items');
     }
 
     /**
@@ -38,7 +41,29 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-    //
+
+        $request->validate([
+            'item_name' => 'required',
+            'price' => 'required',
+            'stock' => 'required',
+            'description' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+
+        $image = $request->file('image')->store('images');
+
+
+        $item = new Item;
+        $item->item_name = $request->item_name;
+        $item->price = $request->price;
+        $item->stock = $request->stock;
+        $item->description = $request->description;
+        $item->image = $image;
+        $item->save();
+
+        Alert::success('Data saved', 'Success');
+        return redirect('dashboard');
     }
 
     /**
