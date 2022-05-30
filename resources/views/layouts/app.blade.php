@@ -13,8 +13,8 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- OwlCarousel 2.3.4 -->
     <link rel="stylesheet" href="{{ asset('css/owl.carousel.css') }}">
@@ -153,6 +153,29 @@
     </script>
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script type="text/javascript">
+        $('.owl-carousel').owlCarousel({
+    loop:false,
+    margin:10,
+    nav:false,
+    stagePadding: 10,
+    dots:false,
+    responsive:{
+        0:{
+          items:1
+        },
+        576:{
+            items:2
+        },
+        992:{
+            items:3
+        },
+        // 1400:{
+        //   items:3
+        // }
+    }
+    })
+    </script>
     @include('sweetalert::alert')
 </body>
 </html>
