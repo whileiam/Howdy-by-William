@@ -32,3 +32,7 @@ Route::get('article', 'App\Http\Controllers\ArticleController@get_articles');
 Route::get('dashboard', 'App\Http\Controllers\AdminController@index');
 Route::get('/add-items', [App\Http\Controllers\AdminController::class , 'create']);
 Route::post('/add-items', 'App\Http\Controllers\AdminController@store');
+
+Route::get('/add-items', function () {
+    Artisan::call('storage:link');
+});
