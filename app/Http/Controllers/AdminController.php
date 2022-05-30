@@ -108,8 +108,19 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function deleteItem()
+    {
+        $items = Item::all();
+        return view('admin.delete-items', compact('items'));
+
+
+
+    }
+
     public function destroy($id)
     {
-    //
+        $item = Item::find($id);
+        $item->delete();
+        return redirect('delete-items');
     }
 }
