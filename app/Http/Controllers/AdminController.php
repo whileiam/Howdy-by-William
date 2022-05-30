@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Item;
 use Carbon\Carbon;
 use Alert;
+use Illuminate\Support\Facades\Artisan;
 
 class AdminController extends Controller
 {
@@ -41,6 +42,7 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
+        Artisan::call('storage:link', []);
 
         $request->validate([
             'item_name' => 'required',
