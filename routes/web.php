@@ -32,3 +32,5 @@ Route::get('article', 'App\Http\Controllers\ArticleController@get_articles');
 Route::get('dashboard', 'App\Http\Controllers\AdminController@index');
 Route::get('/add-items', [App\Http\Controllers\AdminController::class , 'create']);
 Route::post('/add-items', 'App\Http\Controllers\AdminController@store');
+Route::get('/delete-items', 'App\Http\Controllers\AdminController@deleteItem');
+Route::delete('/delete-items/{id}', 'App\Http\Controllers\AdminController@destroy');

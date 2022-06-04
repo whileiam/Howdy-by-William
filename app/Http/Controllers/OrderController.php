@@ -105,11 +105,14 @@ class OrderController extends Controller
 
         $order = Order::where('id', $order_detail->order_id)->first();
         $order->subtotal = $order->subtotal - $order_detail->subtotal;
-        $order->update();
+
 
         if ($order->subtotal == 0) {
             DB::table('orders')->count();
             $order->delete();
+        }
+        else {
+            $order->update();
         }
 
         $order_detail->delete();
